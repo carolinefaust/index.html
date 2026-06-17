@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The P-Town Survival Quiz</title>
+    <style>
+        /* CSS Styling for a sleek, modern app look */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #002255; /* Navy blue to match your theme */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #game-container {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #002255;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        #question-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        /* Styling the multiple choice buttons */
+        .btn {
+            background-color: #f4f6f8;
+            border: 2px solid #e2e8f0;
+            color: #333;
+            padding: 12px 20px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+        .btn:disabled {
+            cursor: not-allowed;
+        }
+
+        /* Dynamic classes added by JavaScript for correct/wrong answers */
+        .correct {
+            background-color: #4ade80 !important;
+            border-color: #22c55e !important;
+            color: white;
+        }
+
+        .wrong {
+            background-color: #f87171 !important;
+            border-color: #ef4444 !important;
+            color: white;
+        }
+
+        #next-btn, #restart-btn {
+            background-color: #002255;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none; /* Hidden until an answer is clicked */
+        }
+
+        #next-btn:hover, #restart-btn:hover {
+            background-color: #003380;
+        }
+
+        .hidden {
+            display: none;
+        }
+        
+        .return-link {
+            display: block;
+            margin-top: 20px;
+            color: #002255;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>The P-Town Survival Quiz</h1>
+        <p class="subtitle">Test your local knowledge.</p>
+
+        <div id="quiz-area">
+            <div id="score-tracker" style="font-weight: bold; margin-bottom: 15px;">Question 1 / 5</div>
+            <div id="question-text">Question goes here?</div>
+            <div id="options-container">
+                </div>
+            <button id="next-btn">Next Question</button>
+        </div>
+
+        <div id="result-area" class="hidden">
+            <h2>Quiz Complete!</h2>
+            <p id="final-score" style="font-size: 1.5rem; font-weight: bold;"></p>
+            <p id="feedback-message"></p>
+            <button id="restart-btn" style="display: inline-block;">Play Again</button>
+        </div>
+
+        <a href="../index.html" class="return-link">Return to the Scratch Page</a>
+    </div>
+
+    <script>
+        // JavaScript logic for the game
+        
+        // 1. The Data: Array of question objects
+        const questions = [
+            {
+                question: "What is the ultimate late-night food destination on Cougar Blvd?",
+                options: ["In-N-Out Burger", "Raising Cane's", "McDonald's", "Taco Bell"],
+                answerIndex: 1
+            },
+            {
+                question: "What inescapable force takes over the city every single summer?",
+                options: ["Snowstorms", "Traffic on I-15", "Summer Sales Bros", "Final Exams"],
+                answerIndex: 2
+            },
+            {
+                question: "When you need elite, cheap study fuel off-campus, what is the optimal order?",
+                options: ["A Costco hot dog combo or chicken bake", "A $7 coffee", "Vending machine snacks", "Dining hall leftovers"],
+                answerIndex: 0
+            },
+            {
+                question: "Which Utah amusement park is the essential weekend getaway?",
+                options: ["Disneyland", "Lagoon", "Six Flags", "Universal Studios"],
+                answerIndex: 1
+            },
+            {
+                question: "What event officially happens every Tuesday morning?",
+                options: ["Intramural Signups", "Free Pizza in the quad", "Fuego Friday prep", "Devotional"],
+                answerIndex: 3
+            }
+        ];
+
+        // 2. State Variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // 3. Grabbing HTML elements
+        const questionTextElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-btn');
+        const scoreTracker = document.getElementById('score-tracker');
+        const quizArea = document.getElementById('quiz-area');
+        const resultArea = document.getElementById('result-area');
+        const finalScoreElement = document.getElementById('final-score');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const restartButton = document.getElementById('restart-btn');
+
+        // 4. Core Functions
+        function loadQuestion() {
+            // Reset state for new question
+            nextButton.style.display = 'none';
+            optionsContainer.innerHTML = '';
+            
+            const currentQuestion = questions[currentQuestionIndex];
+            questionTextElement.innerText = currentQuestion.question;
+            scoreTracker.innerText = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
+
+            // Create buttons for each option
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.innerText = option;
+                button.classList.add('btn');
+                button.addEventListener('click', () => selectAnswer(index, button));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectAnswer(selectedIndex, selectedButton) {
+            const correctIndex = questions[currentQuestionIndex].answerIndex;
+            const allButtons = optionsContainer.querySelectorAll('.btn');
+
+            // Disable all buttons so they can't guess twice
+            allButtons.forEach(btn => btn.disabled = true);
+
+            // Check if correct
+            if (selectedIndex === correctIndex) {
+                selectedButton.classList.add('correct');
+                score++;
+            } else {
+                selectedButton.classList.add('wrong');
+                // Highlight the actual correct answer
+                allButtons[correctIndex].classList.add('correct');
+            }
+
+            // Show the next button
+            nextButton.style.display = 'inline-block';
+        }
+
+        function showResults() {
+            quizArea.classList.add('hidden');
+            resultArea.classList.remove('hidden');
+            finalScoreElement.innerText = `You scored ${score} out of ${questions.length}!`;
+
+            if (score === questions.length) {
+                feedbackMessage.innerText = "Flawless! You are a true local legend.";
+            } else if (score > 2) {
+                feedbackMessage.innerText = "Not bad! You definitely know your way around town.";
+            } else {
+                feedbackMessage.innerText = "You might need to spend a little more time off campus.";
+            }
+        }
+
+        // 5. Event Listeners
+        nextButton.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        restartButton.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultArea.classList.add('hidden');
+            quizArea.classList.remove('hidden');
+            loadQuestion();
+        });
+
+        // 6. Start the game!
+        loadQuestion();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Marriott-compliant styling: Clean, 11pt font, print-friendly */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f4f6f8;
+            color: #000;
+            font-size: 11pt; 
+            line-height: 1.4;
+            padding-top: 40px;
+            padding-bottom: 50px;
+        }
+        .resume-container {
+            max-width: 8.5in; /* Standard document width */
+            margin: 0 auto;
+            padding: 0.75in;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 20pt;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .contact-info {
+            font-size: 11pt;
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            padding-bottom: 2px;
+        }
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+        .entry-subheader {
+            display: flex;
+            justify-content: space-between;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        ul {
+            margin-top: 0;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        
+        /* Ensures the resume prints perfectly without web buttons or backgrounds */
+        @media print {
+            body { background-color: white; padding: 0; }
+            .resume-container { box-shadow: none; padding: 0; max-width: 100%; }
+            .nav-button-container { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-container">
+    
+    <div class="text-center">
+        <h1>Caroline Faust</h1>
+        <div class="contact-info">
+            carolinefaust@icloud.com | (571) 585-1616
+        </div>
+    </div>
+
+    <div class="section-title">Education</div>
+    
+    <div class="entry-header">
+        <span>Brigham Young University</span>
+        <span>Provo, UT</span>
+    </div>
+    <div class="entry-subheader">
+        <span>Bachelor of Science in Pre-Marketing (In Progress)</span>
+        <span>2023 - Current</span>
+    </div>
+    <ul>
+        <li>GPA: 3.60</li>
+        <li>Member, BYU Marketing Association</li>
+        <li>Dean's List, College of Life Sciences Winter 2026</li>
+    </ul>
+
+    <div class="entry-header">
+        <span>Oakton High School</span>
+        <span>Vienna, VA</span>
+    </div>
+    <div class="entry-subheader">
+        <span>Advanced Diploma</span>
+        <span>Graduated June 2023</span>
+    </div>
+    <ul>
+        <li>GPA: 3.98</li>
+        <li>National Honor Society Scholar-Athlete Award (Field Hockey & Lacrosse)</li>
+        <li>Field Hockey Team Captain</li>
+        <li>Two years of Digital Art & Design coursework specializing in Adobe Creative Suite</li>
+    </ul>
+
+    <div class="section-title">Professional Experience</div>
+    
+    <div class="entry-header">
+        <span>Maple Ave Living</span>
+        <span>Current</span>
+    </div>
+    <div class="entry-subheader">
+        <span>Social Media / Marketing Intern</span>
+        <span></span>
+    </div>
+    <ul>
+        <li>Developed and scheduled content across social platforms to grow brand awareness and audience engagement</li>
+        <li>Produced short-form video content and graphic assets aligned with brand voice and target demographic</li>
+        <li>Monitored post performance and contributed creative recommendations to improve reach and interaction</li>
+    </ul>
+
+    <div class="entry-header">
+        <span>Crumbl Cookies</span>
+        <span>Vienna, VA</span>
+    </div>
+    <div class="entry-subheader">
+        <span>Shift Lead</span>
+        <span>2 Years</span>
+    </div>
+    <ul>
+        <li>Promoted to Shift Lead after being named the franchise's first-ever Employee of the Month</li>
+        <li>Supervised team members, managed store operations during peak service hours, and upheld product quality standards</li>
+    </ul>
+
+    <div class="section-title">Service & Leadership</div>
+    
+    <div class="entry-header">
+        <span>Provo YSA 90th Congregation</span>
+        <span>Provo, UT</span>
+    </div>
+    <div class="entry-subheader">
+        <span>President, Women's Organization</span>
+        <span>Current</span>
+    </div>
+    <ul>
+        <li>Lead and organize the local women's organization, coordinating weekly meetings, activities, and service opportunities</li>
+        <li>Collaborate with congregation leaders to support members in spiritual and temporal needs</li>
+        <li>Inspire women to develop a stronger love for others and assist in community service and personal growth</li>
+    </ul>
+
+    <div class="entry-header">
+        <span>Volunteer Representative</span>
+        <span>Brazil Santos</span>
+    </div>
+    <div class="entry-subheader">
+        <span>Regional Volunteer Trainer</span>
+        <span>Aug 2024 - Dec 2025</span>
+    </div>
+    <ul>
+        <li>Mentored and coordinated fellow volunteers across multiple areas in a leadership capacity</li>
+        <li>Created and managed social media video content for missionary outreach scripting, filming, and editing short-form videos</li>
+        <li>Trained fellow volunteers to become service-centered by being motivated by love for God and His children</li>
+    </ul>
+
+    <div class="entry-header">
+        <span>Community Action Foodbank</span>
+        <span>Provo, UT</span>
+    </div>
+    <div class="entry-subheader">
+        <span>Food Bank Volunteer</span>
+        <span>Aug 2023 - Nov 2023</span>
+    </div>
+    <ul>
+        <li>Sorted and distributed food donations to community members in need during a high-demand period post-enrollment</li>
+    </ul>
+
+    <div class="entry-header">
+        <span>Volunteer Youth Coach</span>
+        <span>Vienna, VA</span>
+    </div>
+    <div class="entry-subheader">
+        <span>Field Hockey & Lacrosse</span>
+        <span>Sept 2021 - Aug 2024</span>
+    </div>
+    <ul>
+        <li>Coach youth athletes in fundamentals of field hockey and lacrosse; emphasize teamwork, discipline, and sportsmanship</li>
+    </ul>
+
+    <div class="section-title">Skills & Tools</div>
+    <ul>
+        <li><strong>Languages:</strong> Fluent in Portuguese; conversational in Spanish</li>
+        <li><strong>Creative:</strong> Adobe Creative Suite (Photoshop, Illustrator, Premiere); Canva; Microsoft 365; Claude/Gemini/ChatGPT</li>
+        <li><strong>Content:</strong> Short-form video creation; social media strategy; copywriting; graphic design</li>
+        <li><strong>Other:</strong> Strong organizational and leadership skills; customer service; team supervision</li>
+    </ul>
+
+</div>
+
+<div class="container text-center mt-4 mb-5 nav-button-container">
+    <a href="../index.html" class="btn btn-outline-secondary">Return to Scratch Page</a>
+</div>
+
+</body>
+</html>
